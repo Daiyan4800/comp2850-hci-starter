@@ -10,19 +10,30 @@
 
 ## Quick Start
 
-### GitHub Codespaces (Recommended)
-1. Click **Code** → **Create codespace on main**
-2. Wait for devcontainer to build (~2 minutes)
-3. Server starts automatically on port 8080
-4. Click "Open in Browser" when prompted
+### Local with IDE of Your Choice (Recommended)
+**IntelliJ IDEA, VSCode, Eclipse, or any Kotlin-compatible IDE**
 
-### Local with IntelliJ IDEA
 ```bash
 git clone [this-repo-url]
 cd comp2850-hci-starter
 ./gradlew run
 ```
 Open http://localhost:8080/tasks
+
+**Requirements**: JDK 17+ installed locally
+
+### Lab / FENG (Network) with VSCode
+If you don't have a local machine available, use VSCode from FENG/ RHEL environment:
+1. Connect to network
+2. Open VSCode
+3. Clone and run as above: `./gradlew run`
+
+### GitHub Codespaces (Not Recommended)
+While functional, Codespaces is not our preferred option:
+1. Click **Code** → **Create codespace on main**
+2. Wait for devcontainer to build (~2 minutes)
+3. Server starts automatically on port 8080
+4. Click "Open in Browser" when prompted
 
 ---
 

@@ -2,3 +2,5 @@
 /.gradle/
 .idea/
 /out/
+.claude/
+COMPILATION-ISSUES.md
