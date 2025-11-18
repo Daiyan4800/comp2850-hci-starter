@@ -1,2 +1,5 @@
-time | task | observation | issue_tag | severity
----|---|---|---|---
+time | task | observation | issue_tag | severity|
+-----|------|-------------|-----------|---------|
+11:40| What is your favorite color?| Loves dark colours. |Might suffer from ADHD.  | Minimal **nothing** to be concerned about.|
+11:50| Coding with Python. | Enjoyed overall; However, found it hard to **debug errors and to keep tracks of data types** .| Analytical/problem-solving skills, finds it hard to remember certain information. | Candidate does seem **favorable**, might need to work and develop **remembrance skills**.|
+12:00| Communication skills amongst colleagues! | Has an **extensive knowledge** about workplace and current affairs!| Finds it quite hard to initiate a conversation, speaks only if spoken to.| **Anti-social** and maybe suffers from **Social-anxiety** but could also make a conversation really meaning full and interesting, vast span of knowledge! |
