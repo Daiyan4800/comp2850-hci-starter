@@ -13,7 +13,7 @@
 
 📖 **Essential**:
 - Review [Evaluation Metrics Quick Reference](../references/evaluation-metrics-quickref.md) (formulas for median, MAD, error rates)
-- Review Week 9 Lab 2 findings (`wk09/lab-wk9/submission/task1-draft/05-findings.md`)
+- Review Week 9 Lab 2 findings (`wk09/assessment/05-findings.md`)
 - [Nielsen: Prioritising Web Usability Issues](https://www.nngroup.com/articles/how-to-rate-the-severity-of-usability-problems/)
 
 📖 **Contextual**:
@@ -32,7 +32,7 @@ Week 9 collected raw pilot data: logs, times, errors, quotes. **Today you turn t
 - **Planning**: What specific changes will fix the highest-impact problems?
 
 **Why this matters**:
-- **Gradescope Task 2**: Requires before/after metrics + evidence of data-driven redesign
+- **assessment**: Requires before/after metrics + evidence of data-driven redesign
 - **Week 10 Lab 2**: You'll implement Priority 1 fixes—planning today prevents thrashing tomorrow
 - **Professional practice**: Product decisions require justification (stakeholders ask "why this fix?")
 
@@ -228,7 +228,7 @@ This lab contributes to the following module Learning Outcomes ([full definition
 > 6. **Fix plan**: Add `tabindex="-1"` to error summary, auto-focus on page load
 > 7. **Verification** (Week 10 Lab 2): Retest with no-JS, measure completion rate ≥0.9
 >
-> **Gradescope Task 2 requires**:
+> **assessment requires**:
 > - Before metrics (Week 9)
 > - Analysis + prioritisation (Week 10 Lab 1)
 > - After metrics (Week 10 Lab 2)
@@ -247,7 +247,7 @@ This lab contributes to the following module Learning Outcomes ([full definition
 ```bash
 mkdir -p analysis
 mkdir -p wk10/lab-wk10/docs
-mkdir -p wk10/gradescope/task2
+mkdir -p wk10/assessment
 ```
 
 ### Step 2: Verify raw data (3 min)
@@ -852,7 +852,7 @@ wk9-01,...,fixed,"wk10/lab-wk10/research/verification-notes.md; wk10/lab-wk10/ev
 4. Zero WCAG 3.3.1 / 4.1.3 violations
 5. Evidence captured (screenshots, SR transcripts, metrics)
 6. Backlog updated (wk9-01, wk9-03 marked fixed)
-7. Task 2 evidence pack updated with before/after data
+7. assessment evidence pack updated with before/after data
 
 **If not met**: Document blockers, revert changes, choose lower-priority fix.
 ```
@@ -921,7 +921,7 @@ Next session:
 - **Verify** with 3 participants (SR, keyboard, no-JS)
 - **Measure** completion rate, error rate, qualitative observations
 - **Update** backlog with verification evidence
-- **Prepare** Task 2 draft pack (before/after metrics, code diffs, evidence)
+- **Prepare** assessment draft pack (before/after metrics, code diffs, evidence)
 
 **Before Lab 2**:
 - Review redesign brief (`wk10/lab-wk10/docs/redesign-brief.md`)

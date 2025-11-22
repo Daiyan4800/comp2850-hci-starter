@@ -31,11 +31,11 @@ Week 10 Lab 1 identified Priority 1 fixes through data analysis. **Today you imp
 - **Implementation**: Server-first code + HTMX enhancements
 - **Verification**: Rigorous accessibility testing (keyboard, SR, no-JS)
 - **Measurement**: Before/after metrics proving improvement
-- **Documentation**: Evidence chains for Gradescope Task 2
+- **Documentation**: Evidence chains for assessment
 
 **Why this matters**:
-- **Gradescope Task 2**: Requires before/after metrics + code changes + verification evidence
-- **Week 11 portfolio**: This fix becomes a case study (problem → data → fix → verification)
+- **assessment**: Requires before/after metrics + code changes + verification evidence
+- **assessment portfolio (due end Week 10)**: This fix becomes a case study (problem → data → fix → verification)
 - **Professional practice**: Inclusive design is iterative—implement, test, measure, refine
 
 **Quality bar**: Changes must improve accessibility **without breaking existing functionality**. Regression testing is critical.
@@ -51,7 +51,7 @@ By the end of this session, you will have:
 - Re-piloted with n=2 to verify improvements
 - Measured post-change metrics and compared to baseline
 - Documented evidence chains (code diffs, screenshots, metrics)
-- Packaged Task 2 submission with before/after data
+- Packaged assessment submission with before/after data
 
 ### Learning Outcomes Addressed
 This lab contributes to the following module Learning Outcomes ([full definitions](../references/learning-outcomes.md)):
@@ -104,7 +104,7 @@ Maps to WCAG: 2.2 AA (demonstrable compliance)
 >
 > **HCI connection**: Before/after metrics demonstrate **measurable impact**—not just "we fixed it" but "completion improved by 50%."
 >
-> **Gradescope Task 2 requires**: Table + narrative explaining significance (who benefits, why it matters).
+> **assessment requires**: Table + narrative explaining significance (who benefits, why it matters).
 >
 > 🔗 [Measuring UX: Before/After Studies](https://measuringux.com/before-after/)
 
@@ -153,7 +153,7 @@ Maps to WCAG: 2.2 AA (demonstrable compliance)
 
 > **Code Diffs** [GLOSSARY]
 >
-> Side-by-side comparison showing what changed. Essential for Task 2 evidence.
+> Side-by-side comparison showing what changed. Essential for assessment evidence.
 >
 > **Format**:
 > ```diff
@@ -170,7 +170,7 @@ Maps to WCAG: 2.2 AA (demonstrable compliance)
 >
 > **Generate automatically**:
 > ```bash
-> git diff wk9-baseline..HEAD -- templates/ > wk10/gradescope/task2/04-key-diffs.md
+> git diff wk9-baseline..HEAD -- templates/ > wk10/assessment/04-key-diffs.md
 > ```
 >
 > **HCI connection**: Diffs make fixes **transparent and reproducible**—assessors and peers can see exactly what changed.
@@ -378,7 +378,7 @@ No-JS,PRG pattern working (refresh doesn't duplicate),,
 No-JS,Full page renders vs fragments (correct responses),,
 Visual,Contrast meets WCAG AA (4.5:1 text),,
 Visual,200% zoom: no horizontal scroll,,
-Visual,Error messages visible (not color-only),,
+Visual,Error messages visible (not colour-only),,
 Visual,Focus indicators meet contrast requirements,,
 ```
 
@@ -411,7 +411,7 @@ Visual,Focus indicators meet contrast requirements,,
 **Visual testing**:
 - [ ] Use contrast checker (DevTools → CSS Overview or extension)
 - [ ] Zoom to 200% (Ctrl/Cmd + plus) → no horizontal scroll
-- [ ] Error states visible without color (text, icons, position)
+- [ ] Error states visible without colour (text, icons, position)
 
 ### Step 3: Document results (3 min)
 
@@ -484,7 +484,7 @@ P7_post (NVDA, keyboard-only):
 - Notes: "Error was clear this time, heard it immediately"
 ```
 
-### Step 3: Analyze post-change data (5 min)
+### Step 3: Analyse post-change data (5 min)
 
 **Open `data/metrics.csv`**, filter for session IDs `P6_post`, `P7_post`, `P8_post`.
 
@@ -536,11 +536,11 @@ P7_post (NVDA, keyboard-only):
 
 ---
 
-## Activity D: Package Task 2 Evidence Bundle (20 min)
+## Activity D: Package assessment Evidence Bundle (20 min)
 
 **Goal**: Assemble all artefacts for Gradescope submission.
 
-**Directory structure**: `wk10/gradescope/task2/`
+**Directory structure**: `wk10/assessment/`
 
 ### Step 1: Copy/create core documents (10 min)
 
@@ -587,7 +587,7 @@ Fix restored functional parity for no-JS users (0% → 100% completion) and impr
 
 Generate code diffs:
 ```bash
-git diff wk9-baseline..HEAD -- templates/tasks/index.peb src/main/kotlin/routes/Tasks.kt > wk10/gradescope/task2/04-key-diffs.md
+git diff wk9-baseline..HEAD -- templates/tasks/index.peb src/main/kotlin/routes/Tasks.kt > wk10/assessment/04-key-diffs.md
 ```
 
 Annotate with explanations:
@@ -655,7 +655,7 @@ val status = """<div id="status" role="alert" aria-live="assertive" hx-swap-oob=
 **Create `05-evidence/` directory**:
 
 ```
-wk10/gradescope/task2/05-evidence/
+wk10/assessment/05-evidence/
 ├── screenshots/
 │   ├── before-htmx-error.png (no role=alert visible in devtools)
 │   ├── after-htmx-error.png (role=alert visible)
@@ -692,10 +692,10 @@ wk10/gradescope/task2/05-evidence/
 
 ### Step 3: Create README (5 min)
 
-**Create `wk10/gradescope/task2/README.md`**:
+**Create `wk10/assessment/README.md`**:
 
 ```markdown
-# COMP2850 HCI — Gradescope Task 2 Submission
+# COMP2850 HCI — assessment Submission
 
 **Student**: [Your name]
 **Date**: 2025-10-22
@@ -739,7 +739,7 @@ All files reference each other for full traceability.
 
 ✋ **Stop and check**:
 - [ ] All 5 core documents present in `task2/`
-- [ ] Evidence artefacts organized in `05-evidence/`
+- [ ] Evidence artefacts organised in `05-evidence/`
 - [ ] README.md complete with summary
 - [ ] All files sanitized (no PII)
 - [ ] File names match spec exactly
@@ -751,7 +751,7 @@ All files reference each other for full traceability.
 ### Commit message
 
 ```bash
-git add templates/ src/main/kotlin/ data/metrics.csv analysis/ wk10/gradescope/task2/ wk10/lab-wk10/a11y/ backlog/backlog.csv
+git add templates/ src/main/kotlin/ data/metrics.csv analysis/ wk10/assessment/ wk10/lab-wk10/a11y/ backlog/backlog.csv
 
 git commit -m "$(cat <<'EOF'
 wk10s2: implemented inclusive redesign, verified, packaged Task 2
@@ -763,7 +763,7 @@ wk10s2: implemented inclusive redesign, verified, packaged Task 2
 - Completed accessibility regression checklist (21/22 pass, 1 contrast issue logged)
 - Ran verification pilots (n=3): T2 completion 67% → 100%, parity restored for no-JS
 - Collected before/after metrics: completion +33%, error rate -8%, median time -78ms (JS-on)
-- Packaged Gradescope Task 2 bundle: brief, checklist, metrics, code diffs, evidence
+- Packaged assessment bundle: brief, checklist, metrics, code diffs, evidence
 - Updated backlog: wk9-01, wk9-03 marked fixed with verification evidence
 
 Key results:
@@ -793,11 +793,11 @@ EOF
 
 5. **Evidence quality**: Is your evidence chain complete (data → analysis → fix → verification)? What's missing or weak?
 
-6. **Week 11 readiness**: Can you present this fix in 5 minutes (problem → data → solution → proof)? Practice your narrative.
+6. **Assessment readiness**: Can you present this fix in 5 minutes (problem → data → solution → proof)? Practice your narrative.
 
 ---
 
-## Looking Ahead: Week 11 Studio Crit
+## Looking Ahead: Week 11 (Optional Refinement Week 11 Studio Crit Early Marking)
 
 Next week:
 - **Lab 1**: Present evidence chains to peers (5 min each)
@@ -806,7 +806,7 @@ Next week:
 - **Lab 2**: Final refinements, portfolio assembly, submission prep
 
 **Before Week 11**:
-- Review Task 2 bundle—can you explain every file?
+- Review assessment bundle—can you explain every file?
 - Practice 5-min presentation (problem → data → fix → verification)
 - Identify 1-2 backup issues (if your main fix gets critiqued)
 
@@ -856,4 +856,4 @@ Next week:
 
 ---
 
-**Lab complete!** You have an implemented, verified, documented inclusive redesign ready for Week 11 critique and final submission.
+**Lab complete!** You have an implemented, verified, documented inclusive redesign ready for final assessment submission (due end Week 10).

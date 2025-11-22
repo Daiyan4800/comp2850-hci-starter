@@ -1,4 +1,4 @@
-# Week 9 • Lab 2 — Peer Pilots, Debrief, and Task 1 Draft Pack
+# Week 9 • Lab 2 — Peer Pilots, Debrief, and Assessment Draft Pack
 
 ![COMP2850](https://img.shields.io/badge/COMP2850-HCI-blue)
 ![Week 9](https://img.shields.io/badge/Week-9-orange)
@@ -31,11 +31,11 @@ Week 9 Lab 1 built the evaluation infrastructure. **Today you execute**.
 Running peer pilots is **the most critical empirical HCI activity** in this module:
 - **Data collection**: Objective metrics (time, errors, completion) + subjective (confidence, satisfaction)
 - **Qualitative insights**: Observe real struggles, accessibility barriers, unexpected behaviours
-- **Evidence generation**: Logs, notes, screenshots for Gradescope Task 1 and Week 11 portfolio
+- **Evidence generation**: Logs, notes, screenshots for assessment portfolio (due end Week 10)
 
 **Why this matters**:
 - Week 10 redesign **depends on** identifying real problems (not assumed ones)
-- Task 1 grade depends on evidence quality (traceability from raw data → findings → mitigations)
+- Assessment grade depends on evidence quality (traceability from raw data → findings → mitigations)
 - Professional practice: Decisions backed by data, not opinions
 
 **Ethical imperative**: Participants are peers, not research subjects. Treat them respectfully, honour consent, protect privacy.
@@ -53,7 +53,7 @@ By the end of this session, you will have:
 - Taken observer notes (quotes, errors, time-on-task)
 - Debriefed with participants and synthesised findings
 - Documented findings with evidence chains (raw data → issue → backlog item)
-- Assembled draft Task 1 evidence pack
+- Assembled draft assessment evidence pack
 
 ### Learning Outcomes Addressed
 This lab contributes to the following module Learning Outcomes ([full definitions](../references/learning-outcomes.md)):
@@ -155,7 +155,7 @@ This lab contributes to the following module Learning Outcomes ([full definition
 > 6. **Verification**: Retest with screen reader, confirm announcement
 >
 > **Why this matters**:
-> - **Gradescope Task 1**: Markers check evidence chains (no evidence = no marks)
+> - **Assessment**: Markers check evidence chains (no evidence = no marks)
 > - **Professional practice**: Design decisions require justification
 > - **Accreditation**: External panels expect rigorous HCI process
 >
@@ -697,11 +697,11 @@ wk9-05,9,high,a11y,"Result count after filter not announced to SR",4.1.3,open,"p
 
 ---
 
-## Activity E: Assemble Task 1 Draft Pack (20 min)
+## Activity E: Assemble Assessment Draft Pack (20 min)
 
-**Goal**: Create a complete evidence pack for Gradescope Task 1 submission (will be refined in Week 11).
+**Goal**: Create a complete evidence pack for assessment submission (to be refined and submitted by end Week 10).
 
-**Directory structure**: `wk09/lab-wk9/submission/task1-draft/`
+**Directory structure**: `wk09/assessment/`
 
 ### Step 1: Copy evaluation plan materials (5 min)
 
@@ -730,12 +730,12 @@ wk9-05,9,high,a11y,"Result count after filter not announced to SR",4.1.3,open,"p
 
 Option A: Copy relevant rows from `data/metrics.csv`:
 ```bash
-grep -E "P1_|P2_|P3_|P4_|P5_" data/metrics.csv > wk09/lab-wk9/submission/task1-draft/04-results.csv
+grep -E "P1_|P2_|P3_|P4_|P5_" data/metrics.csv > wk09/assessment/04-results.csv
 ```
 
 Option B: Symbolic link (keeps data in one place):
 ```bash
-ln -s ../../../data/metrics.csv wk09/lab-wk9/submission/task1-draft/04-results.csv
+ln -s ../../../data/metrics.csv wk09/assessment/04-results.csv
 ```
 
 **Include README.md** explaining columns:
@@ -774,7 +774,7 @@ ln -s ../../../data/metrics.csv wk09/lab-wk9/submission/task1-draft/04-results.c
 **Create `06-evidence/` directory**:
 
 ```
-wk09/lab-wk9/submission/task1-draft/06-evidence/
+wk09/assessment/06-evidence/
 ├── screenshots/
 │   ├── t2-validation-error-nojs.png
 │   ├── t1-filter-results.png
@@ -789,7 +789,7 @@ wk09/lab-wk9/submission/task1-draft/06-evidence/
 **Remove any PII** from screenshots and notes.
 
 ✋ **Stop and check**:
-- [ ] Evaluation plan + protocol copied to task1-draft/
+- [ ] Evaluation plan + protocol copied to assessment/
 - [ ] Quantitative data (metrics.csv) included or linked
 - [ ] Findings document complete with statistics + evidence chains
 - [ ] Evidence artefacts collected (screenshots, notes)
@@ -802,17 +802,17 @@ wk09/lab-wk9/submission/task1-draft/06-evidence/
 ### Commit message
 
 ```bash
-git add data/metrics.csv backlog/backlog.csv wk09/lab-wk9/research wk09/lab-wk9/submission
+git add data/metrics.csv backlog/backlog.csv wk09/research wk09/assessment
 
 git commit -m "$(cat <<'EOF'
-wk9s2: completed peer pilots (n=5), assembled Task 1 draft pack
+wk9s2: completed peer pilots (n=5), assembled assessment draft pack
 
 - Conducted 5 peer pilots: 3 standard (HTMX), 1 keyboard-only, 1 no-JS
 - Collected quantitative data: completion rates (80-100%), median times (2s–19s), error rates (20-33% for T2/T3)
 - Captured qualitative observations: validation error accessibility issues, status feedback insufficient, filter UX expectations
 - Verified no-JS parity: functional but 6× slower (expected)
 - Created evidence chains: raw data → findings → backlog items (wk9-01 to wk9-05)
-- Assembled Task 1 draft pack: plan, protocol, results.csv, findings.md, evidence artefacts
+- Assembled assessment draft pack: plan, protocol, results.csv, findings.md, evidence artefacts
 - Identified Priority 1 fixes for Week 10: validation error accessibility (role=alert, aria-describedby, focusable summary)
 
 Key findings:
@@ -840,7 +840,7 @@ EOF
 
 4. **Qualitative insights**: What did observation reveal that logs couldn't capture? How valuable was think-aloud (if used)?
 
-5. **Accessibility impact**: Which findings have highest inclusion impact? How would you prioritize fixes if you could only do one?
+5. **Accessibility impact**: Which findings have highest inclusion impact? How would you prioritise fixes if you could only do one?
 
 6. **Week 10 readiness**: What are your Priority 1 fixes? How will you verify they worked?
 
@@ -849,8 +849,8 @@ EOF
 ## Looking Ahead: Week 10 Analysis & Redesign
 
 Next week:
-- **Lab 1**: Analyse metrics in depth (median, MAD, error rates), prioritize backlog with inclusion × impact scores, plan redesign
-- **Lab 2**: Implement Priority 1-2 fixes, re-verify accessibility, update backlog, prepare Task 2 evidence pack
+- **Lab 1**: Analyse metrics in depth (median, MAD, error rates), prioritise backlog with inclusion × impact scores, plan redesign
+- **Lab 2**: Implement Priority 1-2 fixes, re-verify accessibility, update backlog, finalise assessment submission
 
 **Before Week 10**:
 - Review [Evaluation Metrics Quick Reference](../references/evaluation-metrics-quickref.md) for analysis formulas
@@ -898,4 +898,4 @@ Next week:
 
 ---
 
-**Lab complete!** You have real pilot data, evidence chains, and a draft Task 1 pack. Week 10 will analyse this data rigorously and implement prioritised fixes.
+**Lab complete!** You have real pilot data, evidence chains, and a draft assessment pack. Week 10 will analyse this data rigorously, implement prioritised fixes, and finalise your assessment submission (due end Week 10).

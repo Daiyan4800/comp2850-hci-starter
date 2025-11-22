@@ -34,9 +34,9 @@ Weeks 6–8 built a functional, accessible task list prototype. **Now the critic
 3. Prepare for peer pilots (Week 9 Lab 2)
 
 **Why this matters**:
-- **Gradescope Task 2** requires quantitative data (completion times, error rates) + qualitative insights
+- **Assessment** requires quantitative data (completion times, error rates) + qualitative insights
 - **Week 10 redesign** depends on identifying real bottlenecks (not guesses)
-- **Week 11 portfolio** needs evidence chains: problem → measurement → fix → verification
+- **Assessment portfolio (due end Week 10)** needs evidence chains: problem → measurement → fix → verification
 - **Industry practice**: Product decisions backed by data, not opinions
 
 **Ethical imperative**: Evaluation must respect privacy. We follow **low-risk peer study protocols**—no recordings, no PII, informed consent, opt-out honoured.
@@ -202,8 +202,8 @@ This lab contributes to the following module Learning Outcomes ([full definition
 >
 > **Example — GOOD**:
 > ```csv
-> ts_iso,session_id,task_code,ms,js_mode
-> 2025-10-13T14:23:01Z,X7kL9p,T1,1800,on
+> ts_iso,session_id,request_id,task_code,step,outcome,ms,http_status,js_mode
+> 2025-10-13T14:23:01Z,X7kL9p,r001,T1_filter,success,,1800,200,on
 > ```
 > ✅ Anonymous, minimal, fit-for-purpose
 >
@@ -922,7 +922,7 @@ Confidence ratings (1–5):
 3. Note any missing data or anomalies
 
 **After all pilots**:
-1. Copy `data/metrics.csv` to `wk09/lab-wk9/submission/task1-draft/results.csv`
+1. Copy `data/metrics.csv` to `wk09/assessment/results.csv`
 2. Aggregate notes into themes (Week 10 lab)
 3. Calculate medians, error rates (Week 10 lab)
 
@@ -1075,6 +1075,7 @@ ts_iso,session_id,request_id,task_code,step,outcome,ms,http_status,js_mode
 ```kotlin
 package utils
 
+import io.ktor.http.HttpStatusCode
 import java.io.File
 import java.time.Instant
 import java.time.format.DateTimeFormatter
@@ -1085,66 +1086,73 @@ import java.time.format.DateTimeFormatter
  *
  * Privacy: Ensure session_id is anonymous (no PII).
  */
+data class LogEntry(
+    val sessionId: String,
+    val requestId: String,
+    val taskCode: String,
+    val step: String,
+    val outcome: String,
+    val durationMs: Long,
+    val statusCode: Int,
+    val jsMode: String,
+)
+
 object Logger {
-    private val file = File("data/metrics.csv").apply {
-        parentFile?.mkdirs()
-        if (!exists()) {
-            writeText("ts_iso,session_id,request_id,task_code,step,outcome,ms,http_status,js_mode\n")
+    private val out =
+        File("data/metrics.csv").apply {
+            parentFile?.mkdirs()
+            if (!exists()) writeText("ts_iso,session_id,request_id,task_code,step,outcome,ms,http_status,js_mode\n")
         }
-    }
 
-    /**
-     * Write a single log entry.
-     *
-     * @param session Anonymous session ID (e.g., from cookie)
-     * @param req Request ID (unique per request, for tracing)
-     * @param task Task code (T1_filter, T2_edit, etc.)
-     * @param step Event type (start, success, validation_error, fail, server_error)
-     * @param outcome Specific outcome for errors (blank_title, max_length, etc.)
-     * @param ms Duration in milliseconds (0 if not applicable)
-     * @param status HTTP status code (200, 400, 500, etc.)
-     * @param js JavaScript mode ("on" or "off")
-     */
     @Synchronized
-    fun write(
-        session: String,
-        req: String,
-        task: String,
-        step: String,
-        outcome: String,
-        ms: Long,
-        status: Int,
-        js: String
-    ) {
+    fun write(entry: LogEntry) {
         val ts = DateTimeFormatter.ISO_INSTANT.format(Instant.now())
-        file.appendText("$ts,$session,$req,$task,$step,$outcome,$ms,$status,$js\n")
+        out.appendText(
+            "$ts,${entry.sessionId},${entry.requestId},${entry.taskCode},${entry.step}," +
+                "${entry.outcome},${entry.durationMs},${entry.statusCode},${entry.jsMode}\n",
+        )
     }
 
-    /**
-     * Convenience: log validation error with outcome.
-     */
     fun validationError(
-        session: String,
-        req: String,
-        task: String,
+        sessionId: String,
+        requestId: String,
+        taskCode: String,
         outcome: String,
-        ms: Long,
-        js: String
+        jsMode: String,
     ) {
-        write(session, req, task, "validation_error", outcome, ms, 400, js)
+        write(
+            LogEntry(
+                sessionId = sessionId,
+                requestId = requestId,
+                taskCode = taskCode,
+                step = "validation_error",
+                outcome = outcome,
+                durationMs = 0,
+                statusCode = HttpStatusCode.BadRequest.value,
+                jsMode = jsMode,
+            )
+        )
     }
 
-    /**
-     * Convenience: log success.
-     */
     fun success(
-        session: String,
-        req: String,
-        task: String,
-        ms: Long,
-        js: String
+        sessionId: String,
+        requestId: String,
+        taskCode: String,
+        durationMs: Long,
+        jsMode: String,
     ) {
-        write(session, req, task, "success", "", ms, 200, js)
+        write(
+            LogEntry(
+                sessionId = sessionId,
+                requestId = requestId,
+                taskCode = taskCode,
+                step = "success",
+                outcome = "",
+                durationMs = durationMs,
+                statusCode = HttpStatusCode.OK.value,
+                jsMode = jsMode,
+            )
+        )
     }
 }
 ```
@@ -1371,7 +1379,7 @@ wk9s1: evaluation plan + server-side instrumentation
 - Implemented Timing.kt (timed{} helper, jsMode detection)
 - Instrumented POST /tasks with T3_add logging + validation errors
 - Dry-run verified: metrics.csv captures correct data for JS-on/off paths
-- Scaffolded Task 1 draft evidence pack (eval-plan.md, protocol.md)
+- Scaffolded assessment draft evidence pack (eval-plan.md, protocol.md)
 
 Ready for peer pilots in Week 9 Lab 2.
 
@@ -1384,7 +1392,7 @@ EOF
 
 **Answer in `wk09/reflection.md`**:
 
-1. **Metrics selection**: Which metrics will be most useful for identifying usability issues? Why did you prioritize objective vs subjective data?
+1. **Metrics selection**: Which metrics will be most useful for identifying usability issues? Why did you prioritise objective vs subjective data?
 
 2. **Ethical considerations**: What was most challenging about designing a privacy-respecting evaluation? How did you ensure no PII would be collected?
 
@@ -1404,7 +1412,7 @@ Next session (Lab 2):
 - Run 5–6 peer pilots using your protocol
 - Collect metrics.csv data + qualitative notes
 - Debrief participants
-- Prepare draft evidence pack for Task 1
+- Prepare draft evidence pack for assessment submission
 
 **Before Lab 2**:
 - Review protocol with your pair (practice reading consent script)
